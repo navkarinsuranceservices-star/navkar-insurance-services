@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Insurance Quotation - Get Your Quote</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <h1 class="company-name">🚗 InsureVehicle Pro</h1>
+                    <p class="company-tagline">Your Trusted Insurance Partner</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Progress Indicator -->
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="step-indicators" id="stepIndicators">
+                        <div class="step-indicator active" data-step="1">
+                            <span class="step-number">1</span>
+                            <span class="step-label">Personal</span>
+                        </div>
+                        <div class="step-indicator" data-step="2">
+                            <span class="step-number">2</span>
+                            <span class="step-label">Vehicle</span>
+                        </div>
+                        <div class="step-indicator" data-step="3">
+                            <span class="step-number">3</span>
+                            <span class="step-label">Policy</span>
+                        </div>
+                        <div class="step-indicator" data-step="4">
+                            <span class="step-number">4</span>
+                            <span class="step-label">Review</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Container -->
+                <div class="form-container">
+                    <form id="insuranceForm" class="insurance-form">
+                        
+                        <!-- Step 1: Personal Information (Minimal) -->
+                        <div class="form-step active" id="step1">
+                            <div class="step-header">
+                                <h2>Personal Information</h2>
+                                <p>Please provide your basic contact details</p>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label" for="fullName">Full Name *</label>
+                                    <input type="text" id="fullName" name="fullName" class="form-control" required>
+                                    <div class="error-message" id="fullNameError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="mobileNumber">Mobile Number *</label>
+                                    <input type="tel" id="mobileNumber" name="mobileNumber" class="form-control" pattern="[0-9]{10}" required>
+                                    <div class="error-message" id="mobileNumberError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label optional-label" for="email">Email Address <span class="optional-text">(Optional)</span></label>
+                                    <input type="email" id="email" name="email" class="form-control">
+                                    <div class="error-message" id="emailError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label optional-label" for="dateOfBirth">Date of Birth <span class="optional-text">(Optional)</span></label>
+                                    <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control">
+                                    <div class="error-message" id="dateOfBirthError"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Vehicle Information -->
+                        <div class="form-step" id="step2">
+                            <div class="step-header">
+                                <h2>Vehicle Information</h2>
+                                <p>Please provide details about your vehicle</p>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label" for="registrationNumber">Vehicle Registration Number *</label>
+                                    <input type="text" id="registrationNumber" name="registrationNumber" class="form-control" placeholder="XX##XX####" required>
+                                    <div class="error-message" id="registrationNumberError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="vehicleMake">Vehicle Make *</label>
+                                    <select id="vehicleMake" name="vehicleMake" class="form-control" required>
+                                        <option value="">Select Make</option>
+                                    </select>
+                                    <div class="error-message" id="vehicleMakeError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="vehicleModel">Vehicle Model *</label>
+                                    <input type="text" id="vehicleModel" name="vehicleModel" class="form-control" required>
+                                    <div class="error-message" id="vehicleModelError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="yearOfManufacture">Year of Manufacture *</label>
+                                    <select id="yearOfManufacture" name="yearOfManufacture" class="form-control" required>
+                                        <option value="">Select Year</option>
+                                    </select>
+                                    <div class="error-message" id="yearOfManufactureError"></div>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label class="form-label">Fuel Type *</label>
+                                    <div class="radio-group">
+                                        <label class="radio-option">
+                                            <input type="radio" name="fuelType" value="Petrol" required>
+                                            <span class="radio-label">Petrol</span>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="fuelType" value="Diesel" required>
+                                            <span class="radio-label">Diesel</span>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="fuelType" value="CNG" required>
+                                            <span class="radio-label">CNG</span>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="fuelType" value="Electric" required>
+                                            <span class="radio-label">Electric</span>
+                                        </label>
+                                    </div>
+                                    <div class="error-message" id="fuelTypeError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="cubicCapacity">Cubic Capacity (CC) *</label>
+                                    <input type="number" id="cubicCapacity" name="cubicCapacity" class="form-control" min="100" max="10000" required>
+                                    <div class="error-message" id="cubicCapacityError"></div>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label class="form-label">Vehicle Type *</label>
+                                    <div class="radio-group">
+                                        <label class="radio-option">
+                                            <input type="radio" name="vehicleType" value="Private Car" required>
+                                            <span class="radio-label">Private Car</span>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="vehicleType" value="Commercial Vehicle" required>
+                                            <span class="radio-label">Commercial Vehicle</span>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="vehicleType" value="Two Wheeler" required>
+                                            <span class="radio-label">Two Wheeler</span>
+                                        </label>
+                                    </div>
+                                    <div class="error-message" id="vehicleTypeError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="idv">IDV - Insured Declared Value *</label>
+                                    <div class="input-with-prefix">
+                                        <span class="input-prefix">₹</span>
+                                        <input type="number" id="idv" name="idv" class="form-control" min="1000" required>
+                                    </div>
+                                    <div class="error-message" id="idvError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="dateOfRegistration">Date of Registration *</label>
+                                    <input type="date" id="dateOfRegistration" name="dateOfRegistration" class="form-control" required>
+                                    <div class="error-message" id="dateOfRegistrationError"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Policy Information -->
+                        <div class="form-step" id="step3">
+                            <div class="step-header">
+                                <h2>Policy Information</h2>
+                                <p>Please provide insurance policy details</p>
+                            </div>
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label class="form-label">Do you have previous policy details? *</label>
+                                    <div class="radio-group">
+                                        <label class="radio-option">
+                                            <input type="radio" name="hasPreviousPolicy" value="Yes" required>
+                                            <span class="radio-label">Yes</span>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="hasPreviousPolicy" value="No" required>
+                                            <span class="radio-label">No</span>
+                                        </label>
+                                    </div>
+                                    <div class="error-message" id="hasPreviousPolicyError"></div>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label class="form-label">Type of Insurance *</label>
+                                    <div class="radio-group">
+                                        <label class="radio-option">
+                                            <input type="radio" name="insuranceType" value="Comprehensive" required>
+                                            <span class="radio-label">Comprehensive</span>
+                                        </label>
+                                        <label class="radio-option">
+                                            <input type="radio" name="insuranceType" value="Third Party" required>
+                                            <span class="radio-label">Third Party</span>
+                                        </label>
+                                    </div>
+                                    <div class="error-message" id="insuranceTypeError"></div>
+                                </div>
+
+                                <!-- Previous Policy Details Section -->
+                                <div id="previousPolicyDetails" class="policy-details-section">
+                                    <div class="form-group full-width">
+                                        <label class="form-label">Current Insurance Status *</label>
+                                        <div class="radio-group">
+                                            <label class="radio-option">
+                                                <input type="radio" name="insuranceStatus" value="New Policy">
+                                                <span class="radio-label">New Policy</span>
+                                            </label>
+                                            <label class="radio-option">
+                                                <input type="radio" name="insuranceStatus" value="Renewal">
+                                                <span class="radio-label">Renewal</span>
+                                            </label>
+                                            <label class="radio-option">
+                                                <input type="radio" name="insuranceStatus" value="Rollover">
+                                                <span class="radio-label">Rollover</span>
+                                            </label>
+                                        </div>
+                                        <div class="error-message" id="insuranceStatusError"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label optional-label" for="previousInsurer">Previous Insurance Company <span class="optional-text">(Optional)</span></label>
+                                        <input type="text" id="previousInsurer" name="previousInsurer" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label optional-label" for="policyExpiryDate">Policy Expiry Date <span class="optional-text">(Optional)</span></label>
+                                        <input type="date" id="policyExpiryDate" name="policyExpiryDate" class="form-control">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label class="checkbox-option">
+                                            <input type="checkbox" id="policyExpired90Days" name="policyExpired90Days">
+                                            <span class="checkbox-label">Policy Expired more than 90 days ago</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label optional-label" for="ncb">No Claim Bonus (NCB) <span class="optional-text">(Optional)</span></label>
+                                        <select id="ncb" name="ncb" class="form-control">
+                                            <option value="">Select NCB</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label optional-label" for="claimsLastThreeYears">Claims Made in Last 3 Years <span class="optional-text">(Optional)</span></label>
+                                        <input type="number" id="claimsLastThreeYears" name="claimsLastThreeYears" class="form-control" min="0" max="10">
+                                    </div>
+                                </div>
+
+                                <!-- No Previous Policy Section -->
+                                <div id="noPreviousPolicyDetails" class="policy-details-section hidden">
+                                    <div class="info-message">
+                                        <p><strong>ℹ️ This is your first vehicle insurance policy</strong></p>
+                                        <p>We'll help you get the best coverage for your vehicle. You can proceed directly to review your information.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Review & Submit -->
+                        <div class="form-step" id="step4">
+                            <div class="step-header">
+                                <h2>Review & Submit</h2>
+                                <p>Please review all the information before submitting</p>
+                            </div>
+                            <div class="review-container" id="reviewContainer">
+                                <!-- Review content will be populated by JavaScript -->
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="whatsappNumber">Your WhatsApp Business Number *</label>
+                                <input type="tel" id="whatsappNumber" name="whatsappNumber" class="form-control" pattern="[0-9]{10}" placeholder="Enter 10-digit number" required>
+                                <div class="error-message" id="whatsappNumberError"></div>
+                                <small class="form-help">The quotation request will be sent to this WhatsApp number</small>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn--outline" id="prevBtn" onclick="changeStep(-1)">Previous</button>
+                            <button type="button" class="btn btn--primary" id="nextBtn" onclick="changeStep(1)">Next</button>
+                            <button type="button" class="btn btn--primary hidden" id="submitBtn" onclick="submitForm()">Send to WhatsApp</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- Success Modal -->
+        <div class="modal hidden" id="successModal">
+            <div class="modal-overlay" onclick="closeModal()"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Success!</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Your quotation request has been prepared. WhatsApp will now open with your formatted message ready to send.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn--primary" onclick="closeModal()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
