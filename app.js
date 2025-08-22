@@ -1,5 +1,7 @@
 // Application data
 const appData = {
+    businessWhatsAppNumber: "9408694686",
+    companyName: "Navkar Insurance Services",
     vehicleMakes: ["Maruti Suzuki", "Hyundai", "Tata", "Mahindra", "Toyota", "Honda", "Ford", "Renault", "Kia", "MG", "Nissan", "Skoda", "Volkswagen", "BMW", "Mercedes-Benz", "Audi", "Others"],
     ncbOptions: ["0%", "20%", "25%", "35%", "45%", "50%"],
     yearRange: [2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010],
@@ -94,15 +96,6 @@ function setupEventListeners() {
     const mobileField = document.getElementById('mobileNumber');
     if (mobileField) {
         mobileField.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '').substring(0, 10);
-            e.target.value = value;
-            handleFieldChange(e.target);
-        });
-    }
-
-    const whatsappField = document.getElementById('whatsappNumber');
-    if (whatsappField) {
-        whatsappField.addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '').substring(0, 10);
             e.target.value = value;
             handleFieldChange(e.target);
@@ -226,17 +219,22 @@ function populateDropdowns() {
 
 // Navigation functions
 function changeStep(direction) {
+    console.log(`Attempting to change step by ${direction}. Current step: ${currentStep}`);
+    
     if (direction === 1) {
         // Validate before moving forward
         if (!validateCurrentStep()) {
+            console.log('Validation failed, not advancing step');
             return false;
         }
         if (currentStep < totalSteps) {
             currentStep++;
+            console.log(`Advanced to step: ${currentStep}`);
         }
     } else if (direction === -1) {
         if (currentStep > 1) {
             currentStep--;
+            console.log(`Moved back to step: ${currentStep}`);
         }
     }
     
@@ -259,6 +257,7 @@ function changeStep(direction) {
 
 // Go to specific step
 function goToStep(step) {
+    console.log(`Going to step: ${step}`);
     currentStep = step;
     
     if (currentStep === 4) {
@@ -272,6 +271,8 @@ function goToStep(step) {
 
 // Show specific step
 function showStep(step) {
+    console.log(`Showing step: ${step}`);
+    
     // Hide all steps
     document.querySelectorAll('.form-step').forEach(stepElement => {
         stepElement.classList.remove('active');
@@ -281,6 +282,9 @@ function showStep(step) {
     const currentStepElement = document.getElementById(`step${step}`);
     if (currentStepElement) {
         currentStepElement.classList.add('active');
+        console.log(`Step ${step} is now active`);
+    } else {
+        console.error(`Step element step${step} not found`);
     }
     
     // Update step indicators
@@ -300,6 +304,7 @@ function updateProgressIndicator() {
     if (progressFill) {
         const progressPercentage = (currentStep / totalSteps) * 100;
         progressFill.style.width = `${progressPercentage}%`;
+        console.log(`Progress updated to: ${progressPercentage}%`);
     }
 }
 
@@ -320,12 +325,17 @@ function updateNavigationButtons() {
         if (nextBtn) nextBtn.classList.remove('hidden');
         if (submitBtn) submitBtn.classList.add('hidden');
     }
+    
+    console.log(`Navigation updated for step: ${currentStep}`);
 }
 
 // Validate current step
 function validateCurrentStep() {
+    console.log(`Validating step: ${currentStep}`);
+    
     const currentStepElement = document.getElementById(`step${currentStep}`);
     if (!currentStepElement) {
+        console.error(`Step element not found: step${currentStep}`);
         return false;
     }
     
@@ -341,9 +351,10 @@ function validateCurrentStep() {
     
     if (currentStep === 1) {
         fieldsToValidate = ['fullName', 'mobileNumber'];
-        // Email and DOB are optional
+        console.log('Validating step 1 fields:', fieldsToValidate);
     } else if (currentStep === 2) {
         fieldsToValidate = ['registrationNumber', 'vehicleMake', 'vehicleModel', 'yearOfManufacture', 'fuelType', 'cubicCapacity', 'vehicleType', 'idv', 'dateOfRegistration'];
+        console.log('Validating step 2 fields:', fieldsToValidate);
     } else if (currentStep === 3) {
         fieldsToValidate = ['hasPreviousPolicy', 'insuranceType'];
         
@@ -352,17 +363,23 @@ function validateCurrentStep() {
         if (hasPreviousPolicy === 'Yes') {
             fieldsToValidate.push('insuranceStatus');
         }
+        console.log('Validating step 3 fields:', fieldsToValidate);
     } else if (currentStep === 4) {
-        fieldsToValidate = ['whatsappNumber'];
+        // No additional validation required for review step
+        fieldsToValidate = [];
+        console.log('Step 4 - no validation required');
     }
     
     // Validate each required field
     fieldsToValidate.forEach(fieldName => {
-        if (!validateSpecificField(fieldName)) {
+        const fieldValid = validateSpecificField(fieldName);
+        if (!fieldValid) {
             isValid = false;
+            console.log(`Field validation failed: ${fieldName}`);
         }
     });
     
+    console.log(`Step ${currentStep} validation result: ${isValid}`);
     return isValid;
 }
 
@@ -380,12 +397,16 @@ function validateSpecificField(fieldName) {
             if (errorElement) {
                 errorElement.textContent = 'Please select an option';
             }
+            console.log(`Radio validation failed for: ${fieldName}`);
             return false;
         }
         return true;
     }
     
-    if (!field) return false;
+    if (!field) {
+        console.log(`Field not found: ${fieldName}`);
+        return false;
+    }
     
     const value = field.value ? field.value.trim() : '';
     
@@ -394,6 +415,7 @@ function validateSpecificField(fieldName) {
             errorElement.textContent = 'This field is required';
         }
         field.style.borderColor = 'var(--color-error)';
+        console.log(`Empty field: ${fieldName}`);
         return false;
     }
     
@@ -414,6 +436,7 @@ function validateSpecificField(fieldName) {
                     errorElement.textContent = 'Please enter a valid 10-digit mobile number';
                 }
                 field.style.borderColor = 'var(--color-error)';
+                console.log(`Invalid mobile number: ${value}`);
                 return false;
             }
             break;
@@ -560,6 +583,7 @@ function formatWhatsAppMessage() {
     const age = data.dateOfBirth ? calculateAge(new Date(data.dateOfBirth)) : null;
     
     let message = `*VEHICLE INSURANCE QUOTE REQUEST*
+*${appData.companyName}*
 
 *Customer Details:*
 Name: ${data.fullName || 'N/A'}
@@ -605,32 +629,24 @@ First Time Policy: Yes`;
 
 Please provide quotation for the above details.
 
-Thanks,
+Thank you,
 ${data.fullName || 'Customer'}`;
     
     return message;
 }
 
-// Submit form
+// Submit form - FIXED to use hardcoded business WhatsApp number
 function submitForm() {
-    const whatsappNumber = document.getElementById('whatsappNumber');
-    const whatsappError = document.getElementById('whatsappNumberError');
+    console.log('Submitting form...');
     
-    if (!whatsappNumber || !whatsappNumber.value.trim()) {
-        if (whatsappError) whatsappError.textContent = 'WhatsApp number is required';
-        return;
-    }
-    
-    if (!/^[0-9]{10}$/.test(whatsappNumber.value.trim())) {
-        if (whatsappError) whatsappError.textContent = 'Please enter a valid 10-digit WhatsApp number';
-        return;
-    }
-    
-    if (whatsappError) whatsappError.textContent = '';
+    // Use the business WhatsApp number directly
+    const businessNumber = appData.businessWhatsAppNumber;
     
     const message = formatWhatsAppMessage();
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/91${whatsappNumber.value.trim()}?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/91${businessNumber}?text=${encodedMessage}`;
+    
+    console.log('Opening WhatsApp with URL:', whatsappUrl);
     
     showModal();
     

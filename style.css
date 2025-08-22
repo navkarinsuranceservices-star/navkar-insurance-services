@@ -1125,6 +1125,25 @@ select.form-control {
   font-weight: var(--font-weight-medium);
 }
 
+/* Submit Info Section */
+.submit-info {
+  margin-top: var(--space-24);
+  padding: var(--space-20);
+  background: var(--color-bg-1);
+  border-radius: var(--radius-base);
+  border: 1px solid var(--color-border);
+}
+
+.submit-info .info-message {
+  background: var(--color-bg-3);
+  border-left: 4px solid var(--color-primary);
+  margin: 0;
+}
+
+.submit-info .info-message p:first-child {
+  color: var(--color-primary);
+}
+
 /* Error Message Styles */
 .error-message {
   color: var(--color-error);
@@ -1370,6 +1389,10 @@ select.form-control {
   
   .policy-details-section {
     padding: var(--space-12);
+  }
+  
+  .submit-info {
+    padding: var(--space-16);
   }
   
   .modal-content {

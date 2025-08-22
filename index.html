@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vehicle Insurance Quotation - Get Your Quote</title>
+    <title>Vehicle Insurance Quotation - Navkar Insurance Services</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
         <header class="header">
             <div class="container">
                 <div class="header-content">
-                    <h1 class="company-name">🚗 InsureVehicle Pro</h1>
+                    <h1 class="company-name">🛡️ Navkar Insurance Services</h1>
                     <p class="company-tagline">Your Trusted Insurance Partner</p>
                 </div>
             </div>
@@ -269,16 +269,16 @@
                         <div class="form-step" id="step4">
                             <div class="step-header">
                                 <h2>Review & Submit</h2>
-                                <p>Please review all the information before submitting</p>
+                                <p>Please review all the information before submitting your quotation request</p>
                             </div>
                             <div class="review-container" id="reviewContainer">
                                 <!-- Review content will be populated by JavaScript -->
                             </div>
-                            <div class="form-group">
-                                <label class="form-label" for="whatsappNumber">Your WhatsApp Business Number *</label>
-                                <input type="tel" id="whatsappNumber" name="whatsappNumber" class="form-control" pattern="[0-9]{10}" placeholder="Enter 10-digit number" required>
-                                <div class="error-message" id="whatsappNumberError"></div>
-                                <small class="form-help">The quotation request will be sent to this WhatsApp number</small>
+                            <div class="submit-info">
+                                <div class="info-message">
+                                    <p><strong>📱 Ready to Submit</strong></p>
+                                    <p>Your quotation request will be sent directly to Navkar Insurance Services via WhatsApp. Just click the button below!</p>
+                                </div>
                             </div>
                         </div>
 
@@ -286,7 +286,7 @@
                         <div class="form-navigation">
                             <button type="button" class="btn btn--outline" id="prevBtn" onclick="changeStep(-1)">Previous</button>
                             <button type="button" class="btn btn--primary" id="nextBtn" onclick="changeStep(1)">Next</button>
-                            <button type="button" class="btn btn--primary hidden" id="submitBtn" onclick="submitForm()">Send to WhatsApp</button>
+                            <button type="button" class="btn btn--primary hidden" id="submitBtn" onclick="submitForm()">Submit Quotation Request</button>
                         </div>
                     </form>
                 </div>
@@ -298,10 +298,11 @@
             <div class="modal-overlay" onclick="closeModal()"></div>
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Success!</h3>
+                    <h3>Request Prepared!</h3>
                 </div>
                 <div class="modal-body">
-                    <p>Your quotation request has been prepared. WhatsApp will now open with your formatted message ready to send.</p>
+                    <p>Your quotation request has been prepared successfully. WhatsApp will now open with your formatted message ready to send to Navkar Insurance Services.</p>
+                    <p><strong>Simply click "Send" in WhatsApp to complete your request.</strong></p>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn--primary" onclick="closeModal()">OK</button>
